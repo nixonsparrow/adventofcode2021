@@ -1,4 +1,4 @@
-from os import path
+from .methods import txt_opener
 
 
 def sonar_sweep(measures, wide=False):
@@ -9,10 +9,10 @@ def sonar_sweep(measures, wide=False):
 
 
 def part1(input_file=''):
-    final_input = list(map(int, open(path.dirname(__file__) + input_file)))
+    final_input = txt_opener(input_file, '\n')
     return sonar_sweep(final_input)
 
 
 def part2(input_file=''):
-    final_input = list(map(int, open(path.dirname(__file__) + input_file)))
+    final_input = txt_opener(input_file, '\n')
     return sonar_sweep(final_input, wide=True)
