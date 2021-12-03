@@ -1,7 +1,7 @@
 from ..puzzles import day01
 
 
-class TestDay1:
+class TestDay01:
 
     def test_sonar_sweep(self):
         assert day01.sonar_sweep([1, 3, 5, 5]) == 2

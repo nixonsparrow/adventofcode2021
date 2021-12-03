@@ -2,7 +2,7 @@ from ..puzzles import day02
 import pytest            
 
 
-class TestDay2:
+class TestDay02:
 
     def test_command_executor_part1(self):
         submarine = day02.Submarine()
