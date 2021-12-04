@@ -1,4 +1,3 @@
-from os import path
 from .methods import txt_opener
 
 
@@ -31,10 +30,10 @@ def remove_wrong_numbers(arr, position, co2=False):
 
 
 def read_oxygen_generator_rating(diagnostic_report, co2=False):
-    i, max_i = 0, len(diagnostic_report[0])
+    i = 0
     while len(diagnostic_report) > 1:
         diagnostic_report = remove_wrong_numbers(diagnostic_report, i, co2=co2)
-        i += 1 if i < max_i else - max_i
+        i += 1
 
     return diagnostic_report[0]
 

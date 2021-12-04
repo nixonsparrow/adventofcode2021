@@ -1,4 +1,3 @@
-from os import path
 from .methods import txt_opener
 
 
