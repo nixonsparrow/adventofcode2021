@@ -6,10 +6,10 @@ import pytest
 class TestDay23:
 
     def test_part1(self):
-        assert day23.part1('/../inputs/day23_test.txt') == 1
-        assert day23.part1('/../inputs/day23_final.txt') == 99
+        assert not day23.part1('/../inputs/day23_test.txt')
+        assert not day23.part1('/../inputs/day23_final.txt')
 
     def test_part2(self):
-        assert day23.part2('/../inputs/day23_test.txt') == 1
-        assert day23.part2('/../inputs/day23_final.txt') == 99
+        assert not day23.part2('/../inputs/day23_test.txt')
+        assert not day23.part2('/../inputs/day23_final.txt')
             

@@ -16,6 +16,8 @@ class Grid:
                     x += 1
 
         self.grid_sum = None
+        self.winning_number = None
+        self.drawer = None
 
     def check_for_number(self, nr):
         for row in self.grid:
@@ -33,42 +35,48 @@ class Grid:
         return sum([sum(x for x in row.values() if type(x) == int) for row in self.grid.values()])
 
     def check_if_won(self):              # collect every row then every column
+        if self.winning_number:
+            return True
+
         winning_layouts = [''.join([str(x) for x in self.grid[row].values()]) for row in self.grid]
-        [winning_layouts.append(''.join([str(self.grid[row][col]) for row in self.grid])) for col in 'BINGO']
+        [winning_layouts.append(''.join([str(self.grid[row][col]) for row in self.grid])) for col in self.bingo]
         for layout in winning_layouts:
             if layout == 'XXXXX':
+                self.winning_number = self.drawer.number
                 return True
         return False
 
-    def calculate_final_score(self, winning_number):
-        return self.sum_unmarked_numbers() * winning_number
+    def calculate_final_score(self):
+        return self.sum_unmarked_numbers() * self.winning_number if self.winning_number else None
 
 
 class BingoDrawer:
     def __init__(self, numbers):
         self.numbers = numbers
         self.index = 0
-        self.current_number = None
+        self.number = None
         self.grids = []
+        self.winners = []
 
     def draw_next_number(self):
         self.index += 1
-        number = self.numbers[self.index - 1]
-        [grid.mark_number(number) for grid in self.grids]
-        return (number, None) if not self.check_for_winner() else (self.check_for_winner(), number)
+        self.number = self.numbers[self.index - 1]
+        [grid.mark_number(self.number) for grid in self.grids]
+        return self.number
 
     def is_grid_in_game(self, grid):
         return True if grid in self.grids else False
 
     def append_grids(self, grids):
         for grid in grids:
-            self.grids.append(grid) if not self.is_grid_in_game(grid) else None
+            if not self.is_grid_in_game(grid):
+                self.grids.append(grid)
+                grid.drawer = self
 
     def check_for_winner(self):
         for grid in self.grids:
-            if grid.check_if_won():
-                return grid
-        return None
+            if grid.check_if_won() and grid not in self.winners:
+                self.winners.append(grid)
 
 
 def prepare_for_bingo(whole_list):
@@ -86,17 +94,25 @@ def part1(input_file=''):
     numbers_drawn, grids = prepare_for_bingo(final_input)
 
     drawer = BingoDrawer(numbers_drawn)
-    [drawer.grids.append(grid) for grid in grids]
+    drawer.append_grids([grid for grid in grids])
 
-    winner, last_number = None, None
-    while type(winner) != Grid:
-        winner, last_number = drawer.draw_next_number()
+    while not drawer.winners:
+        drawer.draw_next_number()
+        drawer.check_for_winner()
 
-    print(winner.sum_unmarked_numbers(), last_number)
-    return winner.calculate_final_score(last_number)
+    return drawer.winners[0].calculate_final_score()
 
 
 def part2(input_file=''):
     final_input = txt_opener(input_file, '\n')
-    return final_input
+    numbers_drawn, grids = prepare_for_bingo(final_input)
+
+    drawer = BingoDrawer(numbers_drawn)
+    drawer.append_grids([grid for grid in grids])
+
+    while len(drawer.winners) != len(drawer.grids):
+        drawer.draw_next_number()
+        drawer.check_for_winner()
+
+    return drawer.winners[-1].calculate_final_score()
             
