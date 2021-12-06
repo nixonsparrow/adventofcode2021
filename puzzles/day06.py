@@ -28,18 +28,19 @@ def part1(input_file):
     return len(Lanternfish.fish)
 
 
+# same problem as part1 but different approach because of huge amount of calculations
 def part2(input_file):
-    # final_input = txt_opener(input_file, ',')
-    #
-    # Lanternfish.fish = [Lanternfish(fishy) for fishy in final_input]
-    #
-    # x = [8, 16, 24]
-    # for y in x:
-    #     Lanternfish.fish = []
-    #     for day in range(8):
-    #         for fishy in Lanternfish.fish.copy():
-    #             fishy.live_another_day()
-    #     print(len(Lanternfish.fish))
+    final_input = txt_opener(input_file, ',')
 
-    return None
-            
+    days = 256
+    fish_pool = {day: 0 for day in range(days + 10)}
+
+    for fish in final_input:
+        fish_pool[fish] += 1
+
+    while (day := min(fish_pool)) < days:
+        fish_pool[day + 7] += fish_pool[day]
+        fish_pool[day + 9] += fish_pool[day]
+        del fish_pool[day]
+
+    return sum(fish_pool.values())
