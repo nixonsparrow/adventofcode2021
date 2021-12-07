@@ -4,6 +4,7 @@ import pytest
 
 class TestDay06:
 
+    @pytest.mark.ignored
     def test_part1(self):
         assert day06.part1('/../inputs/day06_test.txt') == 5934
         assert day06.part1('/../inputs/day06_final.txt') == 365131
