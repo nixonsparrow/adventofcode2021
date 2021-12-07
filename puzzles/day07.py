@@ -1,5 +1,4 @@
 from .methods import txt_opener
-from itertools import accumulate
 
 
 def sum_total_fuel_needed(positions, target, that_simple=True):
@@ -14,28 +13,26 @@ def sum_total_fuel_needed(positions, target, that_simple=True):
     return sum([abs(pos - target) for pos in positions])
 
 
+def compare_with_next(positions, least_fuel, simple, descending=False):
+    avg = len(positions)//2
+    # loop check if +1/-1 position is better until it's not
+    while avg >= min(positions) if descending else avg <= max(positions):
+        if sum_total_fuel_needed(positions, avg - 1 if descending else avg + 1, simple) <= least_fuel:
+            avg += - 1 if descending else 1
+            least_fuel = sum_total_fuel_needed(positions, avg, simple)
+        else:
+            return least_fuel
+    return least_fuel
+
+
 # calculate least possible fuel needed
 def fuel_calculator(positions, simple=True):
     # get rounded average position
     avg = len(positions)//2
     least_fuel = sum_total_fuel_needed(positions, avg, simple)
 
-    # loop check if +1 position is better until it's not
-    while avg <= len(positions):
-        if sum_total_fuel_needed(positions, avg + 1) < least_fuel:
-            avg += 1
-            least_fuel = sum_total_fuel_needed(positions, avg, simple)
-        else:
-            avg = len(positions) // 2
-            break
-
-    # loop check if -1 position is better until it's not
-    while avg >= min(positions):
-        if sum_total_fuel_needed(positions, avg - 1, simple) < least_fuel:
-            avg -= 1
-            least_fuel = sum_total_fuel_needed(positions, avg, simple)
-        else:
-            break
+    least_fuel = compare_with_next(positions, least_fuel, simple)
+    least_fuel = compare_with_next(positions, least_fuel, simple, descending=True)
 
     return least_fuel
 
