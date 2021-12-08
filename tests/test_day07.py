@@ -2,6 +2,7 @@ from ..puzzles import day07
 import pytest
 
 
+@pytest.mark.finished
 class TestDay07:
 
     def test_total_fuel_needed(self):

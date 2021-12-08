@@ -1,6 +1,8 @@
 from ..puzzles import day03
+import pytest
 
 
+@pytest.mark.finished
 class TestDay03:
     def test_read_gamma_rate(self):
         assert day03.read_gamma_rate(['101', '000', '101']) == '101'

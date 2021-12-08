@@ -1,8 +1,8 @@
 from ..puzzles import day05
 import pytest
-import numpy as np
 
 
+@pytest.mark.finished
 class TestDay05:
     @pytest.fixture()
     def create_map(self):
@@ -26,12 +26,10 @@ class TestDay05:
         self.map.draw_line('5,7', '5,9')
         assert self.map.count_crossings()
 
-    @pytest.mark.ignored
     def test_part1(self):
         assert day05.part1('/../inputs/day05_test.txt') == 5
         assert day05.part1('/../inputs/day05_final.txt') == 5306
 
-    @pytest.mark.ignored
     def test_part2(self):
         assert day05.part2('/../inputs/day05_test.txt') == 12
         assert day05.part2('/../inputs/day05_final.txt') == 17787

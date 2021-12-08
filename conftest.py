@@ -1,8 +1,8 @@
 def pytest_addoption(parser):
-    parser.addoption('--ignored', action='store_true', dest="ignored",
-                 default=False, help="enable ignored decorated tests")
+    parser.addoption('--finished', action='store_true', dest="finished",
+                 default=False, help="enable finished decorated tests")
 
 
 def pytest_configure(config):
-    if not config.option.ignored:
-        setattr(config.option, 'markexpr', 'not ignored')
+    if not config.option.finished:
+        setattr(config.option, 'markexpr', 'not finished')

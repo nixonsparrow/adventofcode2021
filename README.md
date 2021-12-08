@@ -14,8 +14,7 @@ To see slightly more detailed results:
 ~~~~
 pytest -v
 ~~~~
-To include tests with completion time more than 
-a couple of seconds and future test templates, use:
+To include finished tests with, use:
 ~~~~
-pytest --ignored
+pytest --finished
 ~~~~

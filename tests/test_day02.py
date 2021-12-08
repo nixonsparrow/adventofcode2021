@@ -1,7 +1,8 @@
 from ..puzzles import day02
-import pytest            
+import pytest
 
 
+@pytest.mark.finished
 class TestDay02:
 
     def test_command_executor_part1(self):

@@ -2,6 +2,7 @@ from ..puzzles import day04, methods
 import pytest            
 
 
+@pytest.mark.finished
 class TestDay04:
     @pytest.fixture()
     def include_drawer(self):

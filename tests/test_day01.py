@@ -1,6 +1,8 @@
 from ..puzzles import day01
+import pytest
 
 
+@pytest.mark.finished
 class TestDay01:
 
     def test_sonar_sweep(self):
