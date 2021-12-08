@@ -38,11 +38,16 @@ class TestDay08:
         assert day08.get_digit('bcdfga', self.dict) == '9'
         assert day08.get_digit('fegcab', self.dict) == '0'
 
+    def test_dictionary_writer(self):
+        correct_dict = {'0': 'cagedb', '1': 'ab', '2': 'gcdfa', '3': 'fbcad', '4': 'eafb',
+                        '5': 'cdfbe', '6': 'cdfgeb', '7': 'dab', '8': 'acedgfb', '9': 'cefabd'}
+        data = 'acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab'
+        assert day08.dictionary_writer(data) == correct_dict
+
     def test_part1(self):
         assert day08.part1('/../inputs/day08_test.txt') == 26
         assert day08.part1('/../inputs/day08_final.txt') == 554
 
-    # @pytest.mark.skip
     def test_part2(self):
         assert day08.part2('/../inputs/day08_test.txt') == 61229
         assert day08.part2('/../inputs/day08_final.txt') == 990964
