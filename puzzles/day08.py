@@ -16,6 +16,7 @@ def dictionary_writer(x_digits):
     while '' in digits.values():
         for x_digit in x_digits.split():
             if x_digit not in digits.values():      # exclude digits already known
+
                 if len(x_digit) == 2:               # check for obvious digit codes 1/4/7/8
                     digits['1'] = x_digit
                 elif len(x_digit) == 4:
@@ -25,6 +26,7 @@ def dictionary_writer(x_digits):
                 elif len(x_digit) == 7:
                     digits['8'] = x_digit
                 else:
+
                     if len(x_digit) == 5:               # search for 2/3/5 based on similar bars number
                         if get_same_bars(x_digit, digits['9']) == 4:
                             digits['2'] = x_digit
@@ -33,6 +35,7 @@ def dictionary_writer(x_digits):
                                 digits['3'] = x_digit
                             else:
                                 digits['5'] = x_digit
+
                     else:                               # search for 6/9/0 based on similar bars number
                         if get_same_bars(x_digit, digits['7']) == 2:
                             digits['6'] = x_digit
