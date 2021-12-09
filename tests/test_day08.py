@@ -2,6 +2,7 @@ from ..puzzles import day08
 import pytest            
 
 
+@pytest.mark.finished
 class TestDay08:
     dict = {
         '1': 'cf',
