@@ -2,6 +2,7 @@ from ..puzzles import day10
 import pytest
 
 
+@pytest.mark.finished
 class TestDay10:
     def test_autocomplete_tool(self):
         assert day10.autocomplete_tool('<{([') == 294
