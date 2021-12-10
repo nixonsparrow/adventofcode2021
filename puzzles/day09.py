@@ -11,7 +11,7 @@ def is_low_point(heightmap, target_x, target_y):
             if target_x + x < 0 or target_y + y < 0:
                 continue
             surroundings.append(heightmap[target_x + x][target_y + y])
-        except IndexError:
+        except IndexError:              # ignore if coordinates are beyond
             pass
 
     # return True only if all 2-4 surroundings are higher than target spot
