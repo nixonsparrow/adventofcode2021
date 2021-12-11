@@ -42,7 +42,8 @@ def part2(input_file):
     final_input = txt_opener(input_file, '\n')
 
     # get all sequences without wrong closing bracket
-    sequences = [search_for_bracket_closures(sequence) for sequence in final_input if type(search_for_bracket_closures(sequence)) != int]
+    sequences = [search_for_bracket_closures(sequence) for sequence in final_input]
+    incomplete_sequences = [sequence for sequence in sequences if type(sequence) != int]
 
-    sorted_results = sorted([autocomplete_tool(seq) for seq in sequences])
+    sorted_results = sorted([autocomplete_tool(seq) for seq in incomplete_sequences])
     return sorted_results[len(sorted_results)//2]
