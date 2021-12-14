@@ -27,18 +27,10 @@ def update_polymer_dictionary(polymers, ins_rules):
     return new_polymers
 
 
-def get_letter_occurrences(letters, polymers):
-
+def get_letter_occurrences(letters, polymers, last_letter):
     for pair, value in polymers.items():
-        for letter in pair:
-            letters[letter] += value
-
-    # divide by 2 (because every letter was only a half of actual pair) but include side characters
-    for letter in letters:
-        if letters[letter] % 2 == 0:
-            letters[letter] = letters[letter] // 2
-        else:
-            letters[letter] = (letters[letter] + 1) // 2
+        letters[pair[0]] += value
+    letters[last_letter] += 1
 
     return letters
 
@@ -75,6 +67,6 @@ def part2(input_file):              # fast calculations needed
         polymers = update_polymer_dictionary(polymers, ins_rules)
 
     letters = {letter: 0 for letter in all_possible_letters}
-    letters = get_letter_occurrences(letters, polymers)
+    letters = get_letter_occurrences(letters, polymers, template[-1])
 
     return max(letters.values()) - min(letters.values())
