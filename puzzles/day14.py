@@ -18,6 +18,31 @@ def get_occurrences(template):      # returned example: {'A': 256, 'B': 112, 'C'
                   key=lambda i: i['total'], reverse=True)
 
 
+def update_polymer_dictionary(polymers, ins_rules):
+    new_polymers = {k: 0 for k in polymers}
+    for pair, single in ins_rules.items():
+        new_polymers[pair[0] + single] += polymers[pair]
+        new_polymers[single + pair[1]] += polymers[pair]
+
+    return new_polymers
+
+
+def get_letter_occurrences(letters, polymers):
+
+    for pair, value in polymers.items():
+        for letter in pair:
+            letters[letter] += value
+
+    # divide by 2 (because every letter was only a half of actual pair) but include side characters
+    for letter in letters:
+        if letters[letter] % 2 == 0:
+            letters[letter] = letters[letter] // 2
+        else:
+            letters[letter] = (letters[letter] + 1) // 2
+
+    return letters
+
+
 def part1(input_file):              # slow calculations are enough
     final_input = txt_opener(input_file, '\n')
     template = final_input[0]
@@ -37,10 +62,19 @@ def part2(input_file):              # fast calculations needed
     template = final_input[0]
     ins_rules = {row.split(' -> ')[0]: row.split(' -> ')[1] for row in final_input[1:]}
 
-    # get polymer recreated 10 times
-    for _ in range(40):
-        template = polymer_insertion(template, ins_rules)
+    # replace the template with a dictionary of polymer pairs
+    all_possible_letters = []
+    [all_possible_letters.append(letter) for letter in list(template) + list(ins_rules.values()) if letter not in all_possible_letters]
 
-    # subtract: most frequent - least frequent character
-    letters = get_occurrences(template)
-    return letters[0]['total'] - letters[-1]['total']
+    # create dictionary with pairs then find and count all pairs in the template
+    pairs = {letter_a + letter_b: 0 for letter_a in all_possible_letters for letter_b in all_possible_letters}
+    polymers = {pair: len(re.findall(pair, template)) for pair in pairs.keys()}
+
+    # get polymer recreated 40 times
+    for _ in range(40):
+        polymers = update_polymer_dictionary(polymers, ins_rules)
+
+    letters = {letter: 0 for letter in all_possible_letters}
+    letters = get_letter_occurrences(letters, polymers)
+
+    return max(letters.values()) - min(letters.values())
