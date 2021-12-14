@@ -12,4 +12,4 @@ def txt_opener(input_file, separator=None, force_str=False):
     except ValueError:
         the_list = list(map(str, open(path.dirname(__file__) + input_file).read().split(separator)))
 
-    return the_list if len(the_list) > 1 else the_list[0]
+    return [x for x in the_list if x != ''] if len(the_list) > 1 else the_list[0]

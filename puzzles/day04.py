@@ -81,7 +81,7 @@ class BingoDrawer:
 
 def prepare_for_bingo(whole_list):
     numbers_drawn = [int(nr) for nr in whole_list[0].split(',')]
-    raw_grids = [[whole_list[row + i] for row in range(1, 6)] for i in range(1, len(whole_list), 6)]
+    raw_grids = [[whole_list[row + i] for row in range(0, 5)] for i in range(1, len(whole_list), 5)]
     grids = []
     for raw_grid in raw_grids:
         grids.append(Grid(raw_grid))
