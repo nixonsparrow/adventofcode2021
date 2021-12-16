@@ -20,6 +20,17 @@ def get_id(binary_code):
     return int(binary_code[3:6], 2)
 
 
+def get_length_type_id(binary_code):
+    if get_id(binary_code) == 4:
+        raise AttributeError
+    return int(binary_code[6])
+
+
+def read_literal_values(value):
+    end = True if value[0] == '0' else False
+    return value[1:], end
+
+
 def part1(input_file):
     final_input = txt_opener(input_file, '\n')
     return final_input
