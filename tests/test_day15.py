@@ -2,7 +2,7 @@ from ..puzzles import day15
 import pytest
 
 
-# @pytest.mark.finished
+@pytest.mark.finished
 class TestDay15:
     def test_adjacent(self):
         assert list(day15.adjacent((0, 0), ['1234', '5678'])) == [(1, 0), (0, 1)]
