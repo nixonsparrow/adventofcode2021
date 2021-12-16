@@ -12,6 +12,14 @@ def translate_into_binary(sequence):
     return ''.join([get_bin(char) for char in sequence])
 
 
+def get_version(binary_code):
+    return int(binary_code[0:3], 2)
+
+
+def get_id(binary_code):
+    return int(binary_code[3:6], 2)
+
+
 def part1(input_file):
     final_input = txt_opener(input_file, '\n')
     return final_input
