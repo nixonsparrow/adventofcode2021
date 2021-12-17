@@ -39,11 +39,24 @@ class TestDay16:
         assert day16.read_literal_values('11110') == ('1110', False)
         assert day16.read_literal_values('00101') == ('0101', True)
 
+    # def test_compute(self):
+    #     assert day16.compute(self.test_dicts[0]['sequence']) == 6
+    #     assert day16.compute(self.test_dicts[1]['sequence']) == 9
+    #     assert day16.compute(self.test_dicts[2]['sequence']) == 14
+
     # def test_part1(self):
     #     results = [16, 12, 23, 31]
     #     for nr in range(4):
     #         assert day16.part1(f'/../inputs/day16_test{nr + 1}.txt') == results[nr]
     #     assert not day16.part1('/../inputs/day16_final.txt')
+
+    # def test_get_packets(self):
+    #     sequence = day16.translate_into_binary('8A004A801A8002F478')
+    #     print('test_get_packets', sequence)
+    #     v = day16.compute(sequence)
+    #     print('test_get_packets', v)
+    #     assert 0
+
 # 
 #     def test_part2(self):
 #         assert not day16.part2('/../inputs/day16_test1.txt')
