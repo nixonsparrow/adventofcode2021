@@ -2,6 +2,7 @@ from ..puzzles import day16
 import pytest
 
 
+@pytest.mark.skip
 class TestDay16:
     test_dicts = [{'sequence': '110100101111111000101000', 'hexadecimal': 'D2FE28',
                    'id': 4, 'version': 6, 'length_type_id': None},
