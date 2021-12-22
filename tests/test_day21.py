@@ -2,6 +2,7 @@ from ..puzzles import day21
 import pytest
 
 
+@pytest.mark.skip
 class TestDay21:
     def create_players(self):
         self.players = day21.create_players_from_input(['anything here is irrevelant: 2', 'nothing: 10'])
