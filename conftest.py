@@ -1,6 +1,6 @@
 def pytest_addoption(parser):
     parser.addoption('--finished', action='store_true', dest="finished",
-                 default=False, help="enable finished decorated tests")
+                     default=False, help="enable finished decorated tests")
 
 
 def pytest_configure(config):
