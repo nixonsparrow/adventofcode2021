@@ -21,8 +21,12 @@ class TestDay24:
         assert day24.cmd_eql(2, 2) == 1
         assert day24.cmd_eql(5, 2) == 0
 
-    # def test_part1(self):
-    #     assert not day24.part1('/../inputs/day24_test.txt')
+    def test_command_input(self):
+        assert day24.cmd_inp('w', {'w': 0}, '12') == ({'w': 1}, '2')
+        assert day24.cmd_inp('w', {'w': 1}, '2') == ({'w': 2}, '')
+
+    def test_part1(self):
+        assert day24.part1('/../inputs/day24_test.txt') == 1
     #     assert not day24.part1('/../inputs/day24_final.txt')
     #
     # def test_part2(self):
